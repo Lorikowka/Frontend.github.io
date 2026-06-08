@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // URL вашего бэкенда.
 // Замените на реальный URL при хостинге фронта отдельно (например, 'https://my-backend.up.railway.app')
 // Для локальной разработки с разными портами: 'http://localhost:1488'
-const BACKEND_URL = '';
+const BACKEND_URL = 'http://localhost:1488';
 
 // ═══════════════════════════════════════════
 // БУРГЕР-МЕНЮ
@@ -492,6 +492,7 @@ if (reviewForm) {
 if (phoneInput) {
   phoneInput.addEventListener('input', function () {
     let val = this.value.replace(/\D/g, '');
+    if (!val) { this.value = ''; return; }
     if (val.startsWith('8')) val = '7' + val.slice(1);
     if (!val.startsWith('7')) val = '7' + val;
     val = val.slice(0, 11);
