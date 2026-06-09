@@ -12,10 +12,15 @@ function sanitizeText(value) {
 // Ждём загрузки DOM
 document.addEventListener('DOMContentLoaded', async () => {
 
-// URL вашего бэкенда.
-// Замените на реальный URL при хостинге фронта отдельно (например, 'https://my-backend.up.railway.app')
-// Для локальной разработки с разными портами: 'http://localhost:1488'
-const BACKEND_URL = 'http://localhost:1488';
+// Автоматическое определение URL бэкенда.
+// 1. Если работаем локально — используем порт 1488.
+// 2. Если фронтенд на GitHub Pages (github.io) — укажите URL вашего развернутого бэкенда.
+// 3. В остальных случаях (когда бэкенд сам отдает фронт) — используем текущий домен.
+const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:1488'
+  : (window.location.hostname.includes('github.io') 
+      ? 'https://your-backend-app.railway.app' // ЗАМЕНИТЕ на ваш URL после деплоя бэкенда
+      : window.location.origin);
 
 // ═══════════════════════════════════════════
 // БУРГЕР-МЕНЮ
